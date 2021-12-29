@@ -15,9 +15,9 @@ class MemorySnapshot {
             return "N/A"
         }
 
-        var string = prefix + "Total: \(info.usedMB)"
+        var string = prefix + "Total: \(info.usedMB) MB"
         if let lastSnapshot = lastSnapshot {
-            string += " Increase: \(lastSnapshot.delta(with: info))"
+            string += ", Increase: \(lastSnapshot.delta(with: info)) MB"
         }
         lastSnapshot = info
         return string
@@ -28,7 +28,7 @@ class MemorySnapshot {
             return "N/A"
         }
         lastSnapshot = info
-        return prefix + "Total: \(info.usedMB)"
+        return prefix + "Total: \(info.usedMB) MB"
     }
 
     private func takeSnapshot() -> task_vm_info_data_t? {
