@@ -10,14 +10,27 @@ import CoreImage
 
 extension CIImage {
     /**
-     Blend image over background using suplied alpha mask image.
+     Blend reciever over background using suplied alpha mask image.
      - When the mask alpha value is 0.0, the result is the background.
-     - When the mask alpha value is 1.0, the result is the image.
+     - When the mask alpha value is 1.0, the result is the image (the reciever).
      */
     func blending(over backgroundImage: CIImage, alphaMask: CIImage) -> CIImage {
         applyingFilter("CIBlendWithAlphaMask",
                        parameters: [
                         kCIInputBackgroundImageKey: backgroundImage,
+                        kCIInputMaskImageKey: alphaMask
+                       ])
+    }
+
+    /**
+     Blend supplied image over receiver using suplied alpha mask image.
+     - When the mask alpha value is 0.0, the result is the receiver.
+     - When the mask alpha value is 1.0, the result is the supplied image.
+     */
+    func blending(with image: CIImage, alphaMask: CIImage) -> CIImage {
+        image.applyingFilter("CIBlendWithAlphaMask",
+                       parameters: [
+                        kCIInputBackgroundImageKey: self,
                         kCIInputMaskImageKey: alphaMask
                        ])
     }
