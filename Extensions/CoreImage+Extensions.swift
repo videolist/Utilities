@@ -23,6 +23,14 @@ extension CIImage {
     }
 
     /**
+     Apply filter to image and return its output
+     */
+    func applying(filter: CIFilter?) -> CIImage? {
+        filter?.setValue(self, forKey: kCIInputImageKey)
+        return filter?.outputImage
+    }
+
+    /**
      Read pixel colors from 1-pixel high image.
      - Returns nil if image's height is bigger than 1 to avoid reading large amounts of data
      - Returned array will contain colors of pixels from left to right
